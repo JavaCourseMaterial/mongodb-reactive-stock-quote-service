@@ -9,4 +9,6 @@ public interface QuoteRepository extends ReactiveMongoRepository<Quote, String> 
 
     @Tailable
     Flux<Quote> findWithTailableCursorBy(); //must be capped collection
+
+    Flux<Quote> findAllByTicker(String quote);
 }

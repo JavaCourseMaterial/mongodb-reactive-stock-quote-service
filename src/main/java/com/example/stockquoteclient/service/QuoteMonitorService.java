@@ -3,6 +3,7 @@ package com.example.stockquoteclient.service;
 
 import com.example.stockquoteclient.client.StockQuoteClient;
 import com.example.stockquoteclient.domain.Quote;
+import com.example.stockquoteclient.domain.QuoteRequest;
 import com.example.stockquoteclient.repositories.QuoteRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -34,5 +35,10 @@ public class QuoteMonitorService implements ApplicationListener<ContextRefreshed
 
     public Flux<Quote> getQuotes() {
         return this.quoteRepository.findAll();
+    }
+
+    public Flux<Quote> getSpecificQuote(QuoteRequest targetQuote) {
+        String quote = targetQuote.getQuote();
+        return this.quoteRepository.findAllByTicker(quote);
     }
 }
